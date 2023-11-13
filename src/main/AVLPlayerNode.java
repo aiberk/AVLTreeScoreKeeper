@@ -36,10 +36,10 @@ public class AVLPlayerNode {
         System.out.println(tree.treeString());
 
         // tree.rotateLeft();
-        // tree = tree.findRoot();
+        // tree = tree.getRoot();
         // System.out.println(tree.treeString());
         // tree.rotateRight();
-        // tree = tree.findRoot();
+        // tree = tree.getRoot();
         // System.out.println(tree.treeString());
 
     }
@@ -87,7 +87,7 @@ public class AVLPlayerNode {
             v.rightChild = z;
         }
         rebalanceTree(z);
-        return this.findRoot();
+        return this.getRoot();
     }
 
     private void rebalanceTree(AVLPlayerNode node) {
@@ -111,7 +111,7 @@ public class AVLPlayerNode {
         }
     }
 
-    private AVLPlayerNode findRoot() {
+    private AVLPlayerNode getRoot() {
         AVLPlayerNode root = this;
         while (root.parent != null) {
             root = root.parent;
@@ -127,6 +127,22 @@ public class AVLPlayerNode {
         if (node == null)
             return -1;
         return 1 + Math.max(height(node.leftChild), height(node.rightChild));
+    }
+
+    private AVLPlayerNode BSTSearch(double value) {
+        AVLPlayerNode current = this; // Start at the root
+
+        while (current != null) {
+            if (current.value == value) {
+                return current; // Node found
+            } else if (value < current.value) {
+                current = current.leftChild; // Go left
+            } else {
+                current = current.rightChild; // Go right
+            }
+        }
+
+        return null; // Node not found
     }
 
     // This should return the new root of the tree
