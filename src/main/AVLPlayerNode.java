@@ -303,7 +303,7 @@ public class AVLPlayerNode {
     public String scoreboard() {
         StringBuilder sb = new StringBuilder();
         // Prepend the column titles
-        sb.append(String.format("%-10s %-5s %s\n", "NAME", "ID", "SCORE"));
+        sb.append(String.format("%-10s %-3s %s\n", "NAME", "ID", "SCORE"));
         inOrderTraversal(sb, this);
         return sb.toString();
     }
@@ -312,14 +312,9 @@ public class AVLPlayerNode {
         if (node == null) {
             return;
         }
-        // Visit the right subtree first for descending order
         inOrderTraversal(sb, node.rightChild);
-
-        // Visit the current node (root)
         Player player = node.data;
-        sb.append(String.format("%-10s %-5d %.2f\n", player.getName(), player.getID(), player.getELO()));
-
-        // Visit the left subtree
+        sb.append(String.format("%-10s %-3d %.2f\n", player.getName(), player.getID(), player.getELO()));
         inOrderTraversal(sb, node.leftChild);
     }
 
