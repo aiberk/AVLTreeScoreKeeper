@@ -129,7 +129,7 @@ public class ScoreKeeper {
 					break;
 				case 'L':
 					// Uncomment this code when you have implemented scoreboard
-					// System.out.println(eloTree.scoreboard());
+					System.out.println(eloTree.scoreboard());
 					break;
 				case 'P':
 					// Uncomment this code when you have implemented treeString

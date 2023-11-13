@@ -136,19 +136,17 @@ public class AVLPlayerNode {
     }
 
     private AVLPlayerNode BSTSearch(double value) {
-        AVLPlayerNode current = this; // Start at the root
-
+        AVLPlayerNode current = this;
         while (current != null) {
             if (current.value == value) {
-                return current; // Node found
+                return current;
             } else if (value < current.value) {
-                current = current.leftChild; // Go left
+                current = current.leftChild;
             } else {
-                current = current.rightChild; // Go right
+                current = current.rightChild;
             }
         }
-
-        return null; // Node not found
+        return null;
     }
 
     // This should return the new root of the tree
@@ -237,11 +235,11 @@ public class AVLPlayerNode {
     // this should return the Player object stored in the node with this.value ==
     // value
     public Player getPlayer(double value) {
-        AVLPlayerNode foundNode = BSTSearch(value); // Use BSTSearch to find the node
+        AVLPlayerNode foundNode = BSTSearch(value);
         if (foundNode != null) {
-            return foundNode.data; // Return the player data if the node is found
+            return foundNode.data;
         }
-        return null; // Return null if no player with the given value is found
+        return null;
     }
 
     // this should return the rank of the node with this.value == value
@@ -260,10 +258,12 @@ public class AVLPlayerNode {
             // If the Elo score is greater than the root, the rank is equal to the rank in
             // the right subtree
             return getRankRecursive(node.rightChild, eloScore);
+            // Add +1 for the root
         } else {
             // If the Elo score is less than the root, the rank is the rank in the left
             // subtree plus the number of nodes in the right subtree, plus one for the root
-            return getRankRecursive(node.leftChild, eloScore) + node.rightWeight + 1;
+            return getRankRecursive(node.leftChild, eloScore) + node.rightWeight;
+            // Add +1 for the root
         }
     }
 
@@ -283,10 +283,7 @@ public class AVLPlayerNode {
     // eg "((bob)alice(bill))"
     public String treeString() {
         StringBuilder sb = new StringBuilder();
-
-        // Helper method to recursively build the string
         buildTreeString(sb, this);
-
         return sb.toString();
     }
 
@@ -294,19 +291,36 @@ public class AVLPlayerNode {
         if (node == null) {
             return;
         }
-
         sb.append("(");
-        buildTreeString(sb, node.leftChild); // Add left subtree
-        sb.append(node.data.getName()); // Add current node's data
-        buildTreeString(sb, node.rightChild); // Add right subtree
+        buildTreeString(sb, node.leftChild);
+        sb.append(node.data.getName());
+        buildTreeString(sb, node.rightChild);
         sb.append(")");
     }
 
     // this should return a formatted scoreboard in descending order of value
     // see example printout in the pdf for the command L
     public String scoreboard() {
-        // TODO
-        return "";
+        StringBuilder sb = new StringBuilder();
+        // Prepend the column titles
+        sb.append(String.format("%-10s %-5s %s\n", "NAME", "ID", "SCORE"));
+        inOrderTraversal(sb, this);
+        return sb.toString();
+    }
+
+    private void inOrderTraversal(StringBuilder sb, AVLPlayerNode node) {
+        if (node == null) {
+            return;
+        }
+        // Visit the right subtree first for descending order
+        inOrderTraversal(sb, node.rightChild);
+
+        // Visit the current node (root)
+        Player player = node.data;
+        sb.append(String.format("%-10s %-5d %.2f\n", player.getName(), player.getID(), player.getELO()));
+
+        // Visit the left subtree
+        inOrderTraversal(sb, node.leftChild);
     }
 
 }
