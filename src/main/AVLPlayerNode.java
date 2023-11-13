@@ -246,10 +246,12 @@ public class AVLPlayerNode {
 
     // this should return the rank of the node with this.value == value
     public int getRank(double eloScore) {
+        // TODO Revisit this method
         return getRankRecursive(this, eloScore); // +1 because the best player is ranked 1
     }
 
     private int getRankRecursive(AVLPlayerNode node, double eloScore) {
+        // TODO Revisit this method
         if (node == null) {
             return 0;
         }
