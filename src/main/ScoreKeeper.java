@@ -119,13 +119,13 @@ public class ScoreKeeper {
 					break;
 				case 'R':
 					// Uncomment this code when you have implemented getPlayer and getRank
-					// checkRank(eloTree,idTree,scan);
-					System.out.println("Unsupported Operation");
+					checkRank(eloTree, idTree, scan);
+					// System.out.println("Unsupported Operation");
 					break;
 				case 'E':
 					// Uncomment this code when you have implemented getRank
-					// checkELO(idTree,scan);
-					System.out.println("Unsupported Operation");
+					checkELO(idTree, scan);
+					// System.out.println("Unsupported Operation");
 					break;
 				case 'L':
 					// Uncomment this code when you have implemented scoreboard

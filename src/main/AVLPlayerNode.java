@@ -245,9 +245,24 @@ public class AVLPlayerNode {
     }
 
     // this should return the rank of the node with this.value == value
-    public int getRank(double value) {
-        // TODO
-        return 0;
+    public int getRank(double eloScore) {
+        return getRankRecursive(this, eloScore); // +1 because the best player is ranked 1
+    }
+
+    private int getRankRecursive(AVLPlayerNode node, double eloScore) {
+        if (node == null) {
+            return 0;
+        }
+
+        if (eloScore > node.value) {
+            // If the Elo score is greater than the root, the rank is equal to the rank in
+            // the right subtree
+            return getRankRecursive(node.rightChild, eloScore);
+        } else {
+            // If the Elo score is less than the root, the rank is the rank in the left
+            // subtree plus the number of nodes in the right subtree, plus one for the root
+            return getRankRecursive(node.leftChild, eloScore) + node.rightWeight + 1;
+        }
     }
 
     public int getBalanceFactor() {
