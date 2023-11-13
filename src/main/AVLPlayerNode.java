@@ -19,7 +19,7 @@ public class AVLPlayerNode {
     public static void main(String[] args) {
         // Creating player objects
         Player bob = new Player("Bob", 2, 1100.0);
-        Player carol = new Player("Carol", 3, 1300.0);
+        Player carol = new Player("Carol", 1, 1300.0);
         Player dan = new Player("Dan", 3, 1500.0);
 
         // Creating the AVL tree
@@ -33,7 +33,13 @@ public class AVLPlayerNode {
         System.out.println(tree.treeString());
         // tree = tree.insert(dan, dan.getELO());
 
-        System.out.println(tree.treeString());
+        // Creating the ID tree
+        AVLPlayerNode idTree = new AVLPlayerNode(bob, bob.getID());
+        idTree = idTree.insert(dan, dan.getID());
+        idTree = idTree.insert(carol, carol.getID());
+
+        System.out.println(idTree.treeString());
+        System.out.println(idTree.getPlayer(1).getName());
 
         // tree.rotateLeft();
         // tree = tree.getRoot();
@@ -231,8 +237,11 @@ public class AVLPlayerNode {
     // this should return the Player object stored in the node with this.value ==
     // value
     public Player getPlayer(double value) {
-        // TODO
-        return null;
+        AVLPlayerNode foundNode = BSTSearch(value); // Use BSTSearch to find the node
+        if (foundNode != null) {
+            return foundNode.data; // Return the player data if the node is found
+        }
+        return null; // Return null if no player with the given value is found
     }
 
     // this should return the rank of the node with this.value == value

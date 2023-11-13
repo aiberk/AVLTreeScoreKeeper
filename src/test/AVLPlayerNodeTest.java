@@ -17,7 +17,7 @@ public class AVLPlayerNodeTest {
         alice = new Player("Alice", 1, 1200.0);
         bob = new Player("Bob", 2, 1100.0);
         carol = new Player("Carol", 3, 1300.0);
-        dan = new Player("Dan", 3, 1500.0);
+        dan = new Player("Dan", 4, 1500.0);
 
         // Inserting players into the tree
         tree = new AVLPlayerNode(alice, alice.getELO());
@@ -138,14 +138,14 @@ public class AVLPlayerNodeTest {
     }
 
     @Test
-    public void testGetRank() {
-        tree = new AVLPlayerNode(carol, carol.getELO());
-        tree = tree.insert(bob, bob.getELO());
-        tree = tree.insert(dan, dan.getELO());
+    public void testGetPlayer() {
+        tree = new AVLPlayerNode(carol, carol.getID());
+        tree = tree.insert(bob, bob.getID());
+        tree = tree.insert(dan, dan.getID());
 
-        String expectedStructure = "((Bob)Carol(Dan))";
-        assertEquals("Tree structure should match expected value after left-right rotation", expectedStructure,
-                tree.treeString());
+        Player foundPlayer = tree.getPlayer(2);
+        assertNotNull("Player should not be null", foundPlayer);
+        assertEquals("Player name should be Bob", "Bob", foundPlayer.getName());
     }
 
     // TODO: Add more tests for rotations
