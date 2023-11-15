@@ -100,20 +100,23 @@ public class AVLPlayerNode {
         while (node != null) {
             node.updateBalanceFactor();
 
-            // Check balance factor and perform rotations
-            if (node.balanceFactor < -1) { // Right heavy
+            if (node.balanceFactor < -1) {
                 if (height(node.rightChild.leftChild) > height(node.rightChild.rightChild)) {
-                    node.rightChild.rotateRight(); // Right-Left case
+                    // Right-Left case
+                    node.rightChild.rotateRight();
                 }
-                node.rotateLeft(); // Right-Right case
-            } else if (node.balanceFactor > 1) { // Left heavy
+                // Right-Right case
+                node.rotateLeft();
+            } else if (node.balanceFactor > 1) {
                 if (height(node.leftChild.rightChild) > height(node.leftChild.leftChild)) {
-                    node.leftChild.rotateLeft(); // Left-Right case
+                    // Left-Right case
+                    node.leftChild.rotateLeft();
                 }
-                node.rotateRight(); // Left-Left case
+                // Left-Left case
+                node.rotateRight();
             }
 
-            node = node.parent; // Move up to the parent
+            node = node.parent;
         }
     }
 
@@ -245,7 +248,7 @@ public class AVLPlayerNode {
     // this should return the rank of the node with this.value == value
     public int getRank(double eloScore) {
         // TODO Revisit this method
-        return getRankRecursive(this, eloScore); // +1 because the best player is ranked 1
+        return getRankRecursive(this, eloScore);
     }
 
     private int getRankRecursive(AVLPlayerNode node, double eloScore) {
