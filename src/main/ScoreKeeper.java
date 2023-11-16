@@ -103,15 +103,14 @@ public class ScoreKeeper {
 					break;
 				case 'D':
 					if (numPeople > 3) {
-						// Uncomment this code when you have implemented delete
 
-						// System.out.println("Please enter the ID number of the player you wish to
-						// remove from the system");
-						// int id = scan.nextInt();
-						// Player curtains = idTree.getPlayer((double)id);
-						// idTree=idTree.delete(id);
-						// eloTree=eloTree.delete(curtains.getELO());
-						// numPeople--;
+						System.out
+								.println("Please enter the ID number of the player you wish to remove from the system");
+						int id = scan.nextInt();
+						Player curtains = idTree.getPlayer((double) id);
+						idTree = idTree.delete(id);
+						eloTree = eloTree.delete(curtains.getELO());
+						numPeople--;
 						System.out.println("Unsupported operation");
 					} else {
 						System.out.println("Cannot afford to lose any more people");

@@ -99,18 +99,13 @@ public class AVLPlayerNodeTest {
 
     @Test
     public void testLeftHeavyOnlyLeftMembersRotation() {
-        // Create a new tree
-        AVLPlayerNode tree = new AVLPlayerNode(dan, dan.getELO()); // Insert highest value first
-        tree = tree.insert(carol, carol.getELO()); // Insert next lower value
-        tree = tree.insert(bob, bob.getELO()); // Insert lowest value, should cause rebalancing
 
-        // Expected structure after right rotation or left-right rotation
-        String expectedStructure = "((Bob)Carol(Dan))"; // Adjust this based on expected outcome
-
+        AVLPlayerNode tree = new AVLPlayerNode(dan, dan.getELO());
+        tree = tree.insert(carol, carol.getELO());
+        tree = tree.insert(bob, bob.getELO());
+        String expectedStructure = "((Bob)Carol(Dan))";
         assertEquals("Tree structure should be balanced after left-heavy insertions",
                 expectedStructure, tree.treeString());
-
-        // Verify balance factors
         assertTrue("Balance factor of root should be between -1 and 1",
                 Math.abs(tree.getBalanceFactor()) <= 1);
     }
@@ -148,7 +143,36 @@ public class AVLPlayerNodeTest {
         assertEquals("Player name should be Bob", "Bob", foundPlayer.getName());
     }
 
-    // TODO: Add more tests for rotations
-    // TODO: for deletions as well tests
+    @Test
+    public void testDelete() {
+        tree = new AVLPlayerNode(carol, carol.getID());
+        tree = tree.insert(bob, bob.getID());
+        tree = tree.insert(dan, dan.getID());
+
+        tree = tree.delete(3);
+        String expectedStructure = "(Bob(Dan))";
+        assertEquals("Tree structure should match expected value after left-right rotation", expectedStructure,
+                tree.treeString());
+    }
+
+    @Test
+    public void testDeleteLeaf() {
+
+    }
+
+    @Test
+    public void testDeleteOneChild() {
+
+    }
+
+    @Test
+    public void testDeleteTwoChildren() {
+
+    }
+
+    @Test
+    public void testDeleteRoot() {
+
+    }
 
 }
